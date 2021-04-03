@@ -51,6 +51,7 @@ class Todo {
 ### 2. Actions : action으로 state를 변경
 
 - action이란?
+
     **`action`은 `state` 를 변경하는 모든 코드**를 말한다. 
     
 💡 **observable을 변경하는 모든 코드에 `action`이라고 표기하는 것을 추천한다. 그렇게 해야 MobX가 자동으로 최적화를 위하여 transactions을 적용하기 때문이다.**
@@ -63,6 +64,7 @@ action을 사용하면 코드를 잘 구조화하는데 도움이 되며, 의도
 ### 3. Derivations : 상태가 변경되었을 때 자동으로 호출
 
 - derivations란?
+
     `state`로 부터 자동으로 도출될 수 있는 모든 것은 `derivation`이라고 한다.
     그 예시로는 User Interface, observable을 사용하여 얻어낼 수 있는 데이터, 서버와 통신하는 것과 같은 백엔드 작업 등이 있다.
     
@@ -72,6 +74,7 @@ action을 사용하면 코드를 잘 구조화하는데 도움이 되며, 의도
     - Reactions : state가 변경되었을 때, 자동으로 일어나게 되는 사이드 이펙트
         
 - derivation에서 알아야 할 것
+
     - 모든 derivation(computed, reaction)은 state가 변경되었을 때, **자동으로** 그리고 **atomic**하게 업데이트된다. => update를 진행중인 값을 observe할 수는 없다.
     - 모든 derivation은 **동기적**으로 업데이트 되는 것이 디폴트다. 이는, action이 state를 변경한 직후에, computed 값을 사용하여도, 그 computed 값은 action이 변경한 observable로 재계산된 값이다. 
     
@@ -81,6 +84,7 @@ action을 사용하면 코드를 잘 구조화하는데 도움이 되며, 의도
 
         
 - **computed를 사용하여 값 만들기**
+
     computed 값을 만드려면, (1) JS getter 함수인 `get`을 써야 하며, (2) `makeObservable` 안에서 `computed`라고 표기해주어야 한다.
     
     **coumputed 값은 lazily update**된다. 즉, 사용되지 않는 computed 값은 side effect(I/O)에 필요해질 때까지는, 업데이트 되지 않는다는 것이다. 만약, 뷰가 더이상 사용되지 않는다면, 자동으로 garbage collected될 것이다.
@@ -113,6 +117,7 @@ class TodoList {
     
     
 - **reactions로 사이드 이펙트 만들기**
+
     reaction 또한 observable이 변경되면 자동으로 실행된다. computed와의 차이점은, computed는 어떠한 결과를 반환한다면, reaction은 'side effect를 만들어내는 것만' 한다. 예를 들면, console.log를 찍기, 네트워크 요청, 등등...이 있을 것이다. 
     
     명시적으로 호출되어야 하는 사이드이펙트와 같은 경우, 관련된 이벤트 핸들러에서 명시적으로 호출될 수 있다. 예를 들면, 폼을 제출했을 때 네트워크 요청을 해야하는 경우가 그렇다
@@ -132,6 +137,7 @@ class TodoList {
     따라서 observable을 사용하는 component를 `observer`로 감싸주어서 최적화를 시켜주어야 한다. 좀 더 최적화를 하자면, 최대한 component가 받는 observable은 해당 컴포넌트가 사용하는 props만 받아야 한다. 그렇지 않을 경우, 다른 Props가 변함으로써, 변하지 않은 props를 사용하는 컴포넌트도 같이 리렌더링되기 때문이다. 또한, dereference를 최대한 나중에 해야 한다. 
     
 - **커스텀 reactions 만들기**
+
     `autorun`이나 `reaction`, `when` 함수를 사용하여 reaction을 만들 수 있다. 
     reaction이 그 안에서 주시하고 있는 observable이나 computed의 값이 변할 때, reaction인 함수가 자동으로 실행된다.
     
@@ -361,6 +367,7 @@ setInterval(doubler.increment, 1000)
 
 
 - action.bound 를 표기했을 경우
+
 ```javascript
 import { makeObservable, observable, action } from "mobx";
 
