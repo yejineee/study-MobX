@@ -421,7 +421,7 @@ setInterval(doubler.say, 1000);
 <img width='50%' src='https://i.imgur.com/RupVMfC.png' />
 
 
-왜 이런식으로 되는지에 대해서는 다른 곳에 더 자세히 글을 남기겠다!
+왜 이런식으로 되는지에 대해서는 다른 곳에 더 자세히 글을 남기겠다! -> [setInterval과 this](https://github.com/yejineee/study-MobX/wiki/setInterval%EA%B3%BC-this)
 
 
 - **action(fn)**
